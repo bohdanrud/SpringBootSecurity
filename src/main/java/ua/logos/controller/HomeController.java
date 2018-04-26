@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.logos.domain.RegisterRequest;
+import ua.logos.mapper.UserMapper;
 import ua.logos.service.UserService;
 
 @Controller
@@ -37,7 +38,7 @@ public class HomeController {
 	public String registerUser(@ModelAttribute("registerModel") RegisterRequest request, Model model) {
 		
 		if(request.getPassword().equals(request.getPasswordConfirmation())) {
-			userService.saveUser();
+			userService.saveUser(UserMapper.registerRequestToUser(request));
 			
 		} else {
 			model.addAttribute("registerModel", new RegisterRequest());
