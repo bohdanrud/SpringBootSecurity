@@ -11,4 +11,9 @@ public class HomeController {
 	public ModelAndView showHome() {
 		return new ModelAndView("home");
 	}
+	
+	@GetMapping("/login")
+	public ModelAndView showLogin() {
+		return new ModelAndView("login");
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import ua.logos.entity.User;
+import ua.logos.mapper.UserMapper;
 import ua.logos.repository.UserRepository;
 
 @Service
@@ -20,7 +21,7 @@ public class CustomUserDetails  implements UserDetailsService{
 		// TODO Auto-generated method stub
 		User user = userRepository.findUserByEmail(email);
 		if (user == null) throw new UsernameNotFoundException("User not found");
-		return null;
+		return UserMapper.toSecurityUser(user);
 	}
 
 }
