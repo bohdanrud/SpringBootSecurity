@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,5 +9,10 @@
 </head>
 <body>
 <h1>Home Page</h1>
+
+<a href="/login">Go to Log In</a> <br>
+<a href="/admin">Go to Admin</a> <br>
+<a href="/user">Go to User</a> <br>
+
 </body>
 </html>
