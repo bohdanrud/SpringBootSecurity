@@ -13,6 +13,7 @@
 
 <sec:authorize access="!isAuthenticated()">
 	<a href="/login">Go to Log In</a> <br>
+	<a href="/register">Go to Register</a> <br>
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">
