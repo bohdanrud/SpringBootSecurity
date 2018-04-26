@@ -10,7 +10,9 @@
 <body>
 <h1>Home Page</h1>
 
-<a href="/login">Go to Log In</a> <br>
+<sec:authorize access="!isAuthenticated()">
+	<a href="/login">Go to Log In</a> <br>
+</sec:authorize>
 <a href="/admin">Go to Admin</a> <br>
 <a href="/user">Go to User</a> <br>
 
