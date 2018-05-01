@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ua.logos.entity.User;
+import ua.logos.mapper.UserMapper;
 import ua.logos.service.UserService;
 
 @Controller
@@ -19,15 +20,28 @@ public class UserController {
 	
 	@GetMapping//("/")
 	public String showUserProfile(Model model, Principal principal) {
-		String email = principal.getName();
-		System.out.println("Security username: " + email);
-		User user = userService.findUserByEmail(email);
+//		String email = principal.getName();
+//		System.out.println("Security username: " + email);
+//		User user = userService.findUserByEmail(email);
+		
+		String id = principal.getName();
+		System.out.println("Security id: " + id);
+		User user = userService.findUserById(Integer.valueOf(id));
 		
 		model.addAttribute("userProfile", user);
 		return "user/profile";
 	}
 	
-	
+	@GetMapping("/user/edit")
+	public String showEdit(Model model, Principal principal) {
+		
+		String id = principal.getName();
+		User user = userService.findUserById(Integer.valueOf(id));
+		
+		model.addAttribute("editModel", UserMapper.userToEditRequest(user));
+		
+		return "user/edit";
+	}
 	
 	
 }
