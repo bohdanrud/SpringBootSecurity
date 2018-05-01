@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,7 +20,7 @@ import lombok.Setter;
 import ua.logos.entity.enums.UserRole;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", indexes = @Index(columnList = "email"))
 @NoArgsConstructor
 @Getter
 @Setter
