@@ -6,13 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.logos.domain.RegisterRequest;
+import ua.logos.entity.User;
 import ua.logos.mail.Mail;
 import ua.logos.mapper.UserMapper;
 import ua.logos.service.EmailService;
 import ua.logos.service.UserService;
+import ua.logos.service.utils.RandomToken;
 
 @Controller
 public class HomeController {
@@ -43,12 +46,18 @@ public class HomeController {
 	public String registerUser(@ModelAttribute("registerModel") RegisterRequest request, Model model) {
 		
 		if(request.getPassword().equals(request.getPasswordConfirmation())) {
-			userService.saveUser(UserMapper.registerRequestToUser(request));
+			User user = UserMapper.registerRequestToUser(request);
+			
+			String token = RandomToken.generateToken();
+			System.out.println("Token: " + token);
+			user.setToken(token);
+			
+			userService.saveUser(user);
 			
 			Mail mail = new Mail();
 			mail.setTo(request.getEmail());
 			mail.setSubject("You are registered");
-			mail.setContent("TEST");
+			mail.setContent("Please verify your email address with link: " + "http://localhost:8080/verify?token=" + token + "&userid=" + user.getId());
 			emailService.sendMessage(mail);
 		} else {
 			model.addAttribute("registerModel", new RegisterRequest());
@@ -58,4 +67,27 @@ public class HomeController {
 		
 		return "redirect:";
 	}
+	
+	
+	
+	
+	@GetMapping("/verify")
+	public String verifyEmail(
+			@RequestParam("token") String token,
+			@RequestParam("userid") String userId
+			) {
+		
+		User user = userService.findUserById(Integer.valueOf(userId));
+		if(user.getToken().equals(token)) {
+			user.setToken(null);
+			userService.updadeUser(user);
+		}else {
+			return "redirect:/?validate=false";
+		}
+		
+		return "home";
+	}
+	
+	
+	
 }

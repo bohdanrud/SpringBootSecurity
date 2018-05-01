@@ -40,5 +40,7 @@ public class User extends BaseEntity{
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_profile_id")
 	private UserProfile userProfile = new UserProfile();
+	
+	private String token;
 
 }
