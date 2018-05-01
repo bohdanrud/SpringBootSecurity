@@ -14,4 +14,5 @@ public interface UserService {
 	
 	List<User> findAllUsers();
 
+	void updadeUser (User user);
 }

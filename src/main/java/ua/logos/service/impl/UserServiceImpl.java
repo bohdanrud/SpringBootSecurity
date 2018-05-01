@@ -2,6 +2,8 @@ package ua.logos.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,13 @@ public class UserServiceImpl implements UserService {
 	public List<User> findAllUsers() {
 		// TODO Auto-generated method stub
 		return userRepository.findAll();
+	}
+
+	@Override
+	@Transactional
+	public void updadeUser(User user) {
+		// TODO Auto-generated method stub
+		userRepository.save(user);
 	}
 
 }

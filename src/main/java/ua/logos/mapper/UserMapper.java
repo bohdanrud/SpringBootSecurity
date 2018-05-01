@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.User;
 
 import ua.logos.domain.EditRequest;
 import ua.logos.domain.RegisterRequest;
+import ua.logos.entity.UserProfile;
 import ua.logos.entity.enums.UserRole;
 
 public interface UserMapper {
@@ -35,5 +36,25 @@ public interface UserMapper {
 		request.setId(user.getId());
 		
 		return request;
+	}
+	
+	public static ua.logos.entity.User editRequestToUser (EditRequest request) {
+		ua.logos.entity.User user = new ua.logos.entity.User();
+		UserProfile userProfile = new UserProfile();
+		
+		user.setId(request.getId());
+		user.setEmail(request.getEmail());
+		user.setPassword(request.getPassword());
+		user.setRole(UserRole.ROLE_USER);
+		
+		userProfile.setFirstName(request.getFirstName());
+		userProfile.setLastName(request.getLastName());
+		userProfile.setId(request.getId());
+		userProfile.setDescription(request.getDescription());
+		userProfile.setAge(request.getAge());
+		
+		user.setUserProfile(userProfile);
+		
+		return user;
 	}
 }
