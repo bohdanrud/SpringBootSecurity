@@ -9,10 +9,18 @@
 </head>
 <body>
 
-
-
+	<div id="app">
+	
+		
+	
+	</div>
 
 	<script src="../resources/js/vue.min.css"></script>
 	<script src="../resources/js/axios.min.css"></script>
+	
+	<script>
+		alert("Hello");
+	
+	</script>
 </body>
 </html>

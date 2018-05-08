@@ -31,5 +31,7 @@
 </form:form>
 </sec:authorize>
 
+<a href="/users">Users</a>
+
 </body>
 </html>

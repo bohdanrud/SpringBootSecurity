@@ -88,6 +88,9 @@ public class HomeController {
 		return "home";
 	}
 	
-	
+	@GetMapping("/users")
+	public String showUsers() {
+		return "users";
+	}
 	
 }
