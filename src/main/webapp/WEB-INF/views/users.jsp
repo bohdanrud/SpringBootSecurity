@@ -92,6 +92,8 @@
 					axios.get(this.rootUrl + "/delete/" + user.id)
 						.then(function(resp){
 						console.log(resp);
+						alert("User with ID: " + user.id + " successfuly deleted!");
+						location.reload();
 					}).catch(function(error){
 						console.log(error);
 					})
