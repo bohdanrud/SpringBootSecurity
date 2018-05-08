@@ -51,13 +51,13 @@ public class SpringBootSecurityAppApplication extends SpringBootServletInitializ
 			
 			for (int i = 0; i < 50; i++) {
 				user = new User();
-				user.setEmail("user" + i + "gmail.com");
+				user.setEmail("user" + i + "@gmail.com");
 				user.setPassword(passwordEncoder.encode(password));
 				user.setRole(UserRole.ROLE_USER);
 				
 				UserProfile profile = new UserProfile();
 				profile.setFirstName("firstName" + i);
-				profile.setLastName("lasrstName" + i);
+				profile.setLastName("lastName" + i);
 				profile.setAge(String.valueOf(i + 20));
 				profile.setDescription("description");
 				
