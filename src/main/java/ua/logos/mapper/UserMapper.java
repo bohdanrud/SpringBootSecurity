@@ -12,7 +12,7 @@ public interface UserMapper {
 
 	public static User toSecurityUser(ua.logos.entity.User user) {
 		return new User(//user.getEmail(), 
-						user.getId().toString(),
+						user.getEmail(),
 						user.getPassword(), 
 						AuthorityUtils.createAuthorityList(String.valueOf(user.getRole())));
 	}

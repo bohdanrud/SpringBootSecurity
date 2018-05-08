@@ -20,6 +20,8 @@
 		<br>
 	 Password: <input type="password" name="password">
 		<br>
+		RememberMe: <input type="checkbox" name="rememberMe">
+		<br>
 		<input type="submit" value="Log In">
 		<br>
 	</form:form>

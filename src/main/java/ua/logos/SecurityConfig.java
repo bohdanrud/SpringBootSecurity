@@ -57,7 +57,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.accessDeniedPage("/")
 		.and()
 		.sessionManagement()
-		.maximumSessions(1);
+		.maximumSessions(1)
+		.and()
+		.and()
+		.rememberMe()
+		.rememberMeParameter("rememberMe")
+		.key("supersecret key")
+		.rememberMeCookieName("RememberMeCookie")
+		.tokenValiditySeconds(365 * 24 * 60 * 60);
 		
 	}
 
