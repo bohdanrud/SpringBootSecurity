@@ -21,11 +21,11 @@
 								<tr v-for="user in users" :key="user.id">
 									<td>
 										<span v-if="user.role == 'ROLE_ADMIN'">
-											<a href="#"> <i class="glyphicon glyphicon-eye-open" style="font-size: 25px;"></i> {{ user.id }} </a>
+											<button class="btn btn-primary" @click="changeUserRole(user)"> <i class="glyphicon glyphicon-eye-open" style="font-size: 25px;"></i> {{ user.id }} </button>
 										</span>
 										
 										<span v-else>
-											<a href="#"> <i class="glyphicon glyphicon-eye-close" style="font-size: 25px;"></i> {{ user.id }} </a>
+											<button class="btn btn-primary" @click="changeUserRole(user)"> <i class="glyphicon glyphicon-eye-close" style="font-size: 25px;"></i> {{ user.id }} </button>
 										</span>
 									</td>
 									
@@ -93,6 +93,16 @@
 						.then(function(resp){
 						console.log(resp);
 						alert("User with ID: " + user.id + " successfuly deleted!");
+						location.reload();
+					}).catch(function(error){
+						console.log(error);
+					})
+				},
+				changeUserRole: function(user){
+					axios.get(this.rootUrl + "/change/role/" + user.id)
+						.then(function(resp){
+						console.log(resp);
+						alert("User with ID: " + user.id + " changed role");
 						location.reload();
 					}).catch(function(error){
 						console.log(error);

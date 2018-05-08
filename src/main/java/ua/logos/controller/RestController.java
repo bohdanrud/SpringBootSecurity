@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ua.logos.entity.User;
+import ua.logos.entity.enums.UserRole;
 import ua.logos.service.UserService;
 
 @org.springframework.web.bind.annotation.RestController
@@ -26,9 +27,18 @@ public class RestController {
 	@GetMapping("/delete/{userId}")
 	public ResponseEntity<?> deleteUser(@PathVariable("userId") int userId) {
 		userService.deleteUserById(userId);
-		
-		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@GetMapping("/change/role/{userId}")
+	public ResponseEntity<?> changeUserRole(@PathVariable("userId") int userId) {
+		User user = userService.findUserById(userId);
+		if (user.getRole().toString().equals("ROLE_ADMIN")) {
+			user.setRole(UserRole.ROLE_USER);
+		} else {
+			user.setRole(UserRole.ROLE_ADMIN);
+		}
+		userService.updadeUser(user);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }
