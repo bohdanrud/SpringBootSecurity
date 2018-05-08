@@ -8,6 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import ua.logos.entity.User;
+import ua.logos.entity.UserProfile;
 import ua.logos.entity.enums.UserRole;
 import ua.logos.repository.UserRepository;
 
@@ -46,6 +47,23 @@ public class SpringBootSecurityAppApplication extends SpringBootServletInitializ
 			user.setEmail("user@gmail.com");
 			user.setPassword(passwordEncoder.encode(password));
 			user.setRole(UserRole.ROLE_USER);
+			userRepository.save(user);
+		}
+		
+		for (int i = 0; i < 50; i++) {
+			PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
+			user = new User();
+			user.setEmail("user" + i + "gmail.com");
+			user.setPassword(passwordEncoder.encode(password));
+			user.setRole(UserRole.ROLE_USER);
+			
+			UserProfile profile = new UserProfile();
+			profile.setFirstName("firstName" + i);
+			profile.setLastName("lasrstName" + i);
+			profile.setAge(String.valueOf(i + 20));
+			profile.setDescription("description");
+			
+			user.setUserProfile(profile);
 			userRepository.save(user);
 		}
 	}
